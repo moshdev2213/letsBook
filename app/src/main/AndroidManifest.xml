@@ -13,20 +13,30 @@
         android:theme="@style/Theme.LetsBook"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Checkout"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Home"
             android:exported="true" />
         <activity
             android:name=".Activity.SignUp"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.SignIn"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.SignIn"
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
