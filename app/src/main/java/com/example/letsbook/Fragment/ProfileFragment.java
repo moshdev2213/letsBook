@@ -80,7 +80,8 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 fetchUser(user -> {
                     Intent intent = new Intent(requireActivity(), EditProfile.class);
-                    intent.putExtra("user", user); // Assuming "user" is Parcelable or Serializable
+                    intent.putExtra("user", user);
+                    intent.putExtra("token", out.getToken()); // Add the String data// Assuming "user" is Parcelable or Serializable
                     startActivity(intent);
                 });
             }

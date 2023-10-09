@@ -9,10 +9,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.letsbook.ApiRoutes.EditUserApi;
+import com.example.letsbook.DialogAlerts.ProgressLoader;
 import com.example.letsbook.Modal.User;
 import com.example.letsbook.Modal.UserRecord;
+import com.example.letsbook.ModalDao.UpdatedUser;
 import com.example.letsbook.R;
+import com.example.letsbook.RetroftService.RetrofitService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditProfile extends AppCompatActivity {
     private ImageView imbBackBtn;
@@ -24,6 +32,8 @@ public class EditProfile extends AppCompatActivity {
     private EditText etUserOldPwdEdtPro;
     private EditText etUserTelEdtPro;
     private EditText etUserEmailEdtPro;
+    private ProgressLoader progressLoader;
+    private String token;
     private User out;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +51,14 @@ public class EditProfile extends AppCompatActivity {
         etUserEmailEdtPro = findViewById(R.id.etUserEmailEdtPro);
 
         out = (User) getIntent().getSerializableExtra("user");
+        token = getIntent().getStringExtra("token");
 
         if(out!=null){
         etUserEmailEdtPro.setText(out.getItems().get(0).getEmail());
         etUserTelEdtPro.setText(""+out.getItems().get(0).getPhone());
         etUserNameEdtPro.setText(out.getItems().get(0).getName());
+//        Toast.makeText(this,""+out.getItems().get(0).getId(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,""+token,Toast.LENGTH_SHORT).show();
         }
 
         imbBackBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +73,51 @@ public class EditProfile extends AppCompatActivity {
                 finish();
             }
         });
+        cvEditProBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editUserProfile(token);
+            }
+        });
         FabImgUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"UnderDev",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void editUserProfile(String tokens){
+
+//        progressLoader = new ProgressLoader(getApplicationContext(), "Editing details", "Please Wait");
+//        progressLoader.startProgressLoader();
+
+        RetrofitService retrofitService = new RetrofitService();
+        EditUserApi authService = retrofitService.getRetrofit().create(EditUserApi.class);
+
+        System.out.println("token CHaeck =" +tokens);
+        Call<UpdatedUser> call = authService.updateUserDetails(tokens,out.getItems().get(0).getId());
+        call.enqueue(new Callback<UpdatedUser>() {
+            @Override
+            public void onResponse(Call<UpdatedUser> call, Response<UpdatedUser> response) {
+                if (response.isSuccessful()) {
+                    UpdatedUser user = response.body();
+                    if (user != null) {
+//                        progressLoader.dismissProgressLoader();
+//                        finish();
+//                        Toast.makeText(getApplicationContext(), "Done editing", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+//                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                    progressLoader.dismissProgressLoader();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdatedUser> call, Throwable t) {
+                System.out.println("Error: " + t.getMessage()); // Print the error message
+//                Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
+//                progressLoader.dismissProgressLoader();
             }
         });
     }
