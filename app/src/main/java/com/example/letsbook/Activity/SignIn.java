@@ -10,16 +10,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.letsbook.ApiRoutes.AuthApi;
+import com.example.letsbook.DialogAlerts.ProgressLoader;
 import com.example.letsbook.FormData.SignInForm;
+import com.example.letsbook.Modal.UserRecord;
+import com.example.letsbook.ModalDao.AuthPassEmail;
 import com.example.letsbook.R;
+import com.example.letsbook.RetroftService.RetrofitService;
 import com.example.letsbook.Validation.ValidationResult;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignIn extends AppCompatActivity {
+    int count = 0;
     private EditText etSignInEmail;
     private EditText etSignInPassword;
     private CardView cvSignInBtn;
     private TextView tvredirectToSignUp;
+    private ProgressLoader progressLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +54,7 @@ public class SignIn extends AppCompatActivity {
         cvSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginValidator(etSignInEmail.getText().toString(),etSignInPassword.getText().toString());
+                authEmail(etSignInEmail.getText().toString(),etSignInPassword.getText().toString());
             }
         });
         tvredirectToSignUp.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +69,7 @@ public class SignIn extends AppCompatActivity {
         SignInForm userLoginForm = new SignInForm(email, password);
         ValidationResult emailValidation = userLoginForm.validateEmail(email);
         ValidationResult passwordValidation = userLoginForm.validatePassword(password);
-        int count = 0; // Assuming you have declared and initialized 'count' earlier
+
 
         if (emailValidation instanceof ValidationResult.Valid) {
             count++;
@@ -75,5 +87,45 @@ public class SignIn extends AppCompatActivity {
             etSignInPassword.setError(((ValidationResult.Empty) passwordValidation).getErrorMsg());
         }
     }
+    private void authEmail(String email, String password) {
+        loginValidator(email, password);
+
+        if (count == 2) {
+            progressLoader = new ProgressLoader(this, "Verifying Login", "Please Wait");
+            progressLoader.startProgressLoader();
+
+            RetrofitService retrofitService = new RetrofitService();
+            AuthApi authService = retrofitService.getRetrofit().create(AuthApi.class);
+
+            Call<UserRecord> call = authService.getUserAuth(new AuthPassEmail(email, password));
+            call.enqueue(new Callback<UserRecord>() {
+                @Override
+                public void onResponse(Call<UserRecord> call, Response<UserRecord> response) {
+                    if (response.isSuccessful()) {
+                        UserRecord user = response.body();
+                        if (user != null) {
+                            Intent intent = new Intent(SignIn.this, Home.class);
+                            intent.putExtra("user", user); // Assuming "user" is Parcelable or Serializable
+                            startActivity(intent);
+                            progressLoader.dismissProgressLoader();
+                            finish();
+                        }
+                    } else {
+                        Toast.makeText(SignIn.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                        progressLoader.dismissProgressLoader();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserRecord> call, Throwable t) {
+                    Toast.makeText(SignIn.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    progressLoader.dismissProgressLoader();
+                }
+            });
+            count = 0;
+        }
+        count = 0;
+    }
+
 
 }
