@@ -14,6 +14,7 @@ import com.example.letsbook.Fragment.IndexFragment;
 import com.example.letsbook.Fragment.ProfileFragment;
 import com.example.letsbook.Fragment.ReservationFragment;
 import com.example.letsbook.Fragment.TrainFragment;
+import com.example.letsbook.Modal.UserRecord;
 import com.example.letsbook.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,40 +28,43 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_home);
-        replaceFrag(new IndexFragment());
+
+        UserRecord receivedUser = (UserRecord) getIntent().getSerializableExtra("user");
+
+        replaceFrag(new IndexFragment(),receivedUser);
+        System.out.println("this is it Home: "+receivedUser.getRecord().getEmail());
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             switch (itemId) {
                 case PROFILE_ID:
-                    replaceFrag(new ProfileFragment());
+                    replaceFrag(new ProfileFragment(),receivedUser);
                     break;
                 case HOME_ID:
-                    replaceFrag(new IndexFragment());
+                    replaceFrag(new IndexFragment(),receivedUser);
                     break;
                 case TRAINS_ID:
-                    replaceFrag(new TrainFragment());
+                    replaceFrag(new TrainFragment(),receivedUser);
                     break;
                 case RESERVATION_ID:
-                    replaceFrag(new ReservationFragment());
+                    replaceFrag(new ReservationFragment(),receivedUser);
                     break;
             }
             return true;
         });
 
     }
-    private void replaceFrag(Fragment fragment) {
+    private void replaceFrag(Fragment fragment,UserRecord record) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//        if (userObj != null) {
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("user", userObj);
-//            fragment.setArguments(bundle);
-//        }
+        if (record != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", record);
+            fragment.setArguments(bundle);
+        }
 
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
