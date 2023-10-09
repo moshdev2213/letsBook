@@ -1,54 +1,85 @@
 package com.example.letsbook.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.letsbook.Activity.SignUp;
+import com.example.letsbook.Modal.UserRecord;
 import com.example.letsbook.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class IndexFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public IndexFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment IndexFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static IndexFragment newInstance(String param1, String param2) {
-        IndexFragment fragment = new IndexFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
+    private Button btnSeeAct;
+    private Button btnBrowseReserves;
+    private Button btnShowTrains;
+    private BottomNavigationView bottomNavigationView;
+    private UserRecord out;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_index, container, false);
+        View view = inflater.inflate(R.layout.fragment_index, container, false);
+
+        btnSeeAct = view.findViewById(R.id.btnSeeAct);
+        btnBrowseReserves = view.findViewById(R.id.btnBrowseReserves);
+        btnShowTrains = view.findViewById(R.id.btnShowTrains);
+        bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        out = (UserRecord) getArguments().getSerializable("user");
+        btnSeeAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reDirectAccountPage();
+                bottomNavigationView.setSelectedItemId(R.id.profile);
+            }
+        });
+
+        btnBrowseReserves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reDirectAccountPage();
+                bottomNavigationView.setSelectedItemId(R.id.reservation);
+            }
+        });
+
+        btnShowTrains.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reDirectAccountPage();
+                bottomNavigationView.setSelectedItemId(R.id.trains);
+            }
+        });
+
+        return view;
+    }
+    private void reDirectAccountPage(){
+        replaceFrag(new ProfileFragment(),out);
+    }
+    private void reDirectTrainPage(){
+        replaceFrag(new TrainFragment(),out);
+    }
+    private void reDirectReservationPage(){
+        replaceFrag(new ReservationFragment(),out);
+    }
+    private void replaceFrag(Fragment fragment,UserRecord out) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        if (out != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", out);
+            fragment.setArguments(bundle);
+        }
+
+        transaction.replace(R.id.frame_layout, fragment); // Replace the current Fragment with FragmentB
+        transaction.commit();
     }
 }

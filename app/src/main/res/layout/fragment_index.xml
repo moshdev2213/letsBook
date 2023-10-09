@@ -124,7 +124,7 @@
                             app:shapeAppearance="@style/roundedImageView" />
 
                         <Button
-                            android:id="@+id/btnBuyMeal"
+                            android:id="@+id/btnSeeAct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -241,7 +241,7 @@
                         android:layout_height="match_parent">
 
                         <Button
-                            android:id="@+id/btnBrowseWrkout"
+                            android:id="@+id/btnBrowseReserves"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
@@ -295,7 +295,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <Button
-                    android:id="@+id/btnScanBody"
+                    android:id="@+id/btnShowTrains"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"

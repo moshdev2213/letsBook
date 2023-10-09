@@ -3,64 +3,91 @@ package com.example.letsbook.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.Toast;
 
+import com.example.letsbook.Adapter.TrainAdapter;
+import com.example.letsbook.ApiRoutes.TrainApi;
+import com.example.letsbook.Modal.User;
+import com.example.letsbook.Modal.UserRecord;
+import com.example.letsbook.ModalDao.TrainItem;
+import com.example.letsbook.ModalDao.TrainRes;
+import com.example.letsbook.ModalDao.UserItem;
 import com.example.letsbook.R;
+import com.example.letsbook.RetroftService.RetrofitService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TrainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class TrainFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TrainFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TrainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TrainFragment newInstance(String param1, String param2) {
-        TrainFragment fragment = new TrainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private RecyclerView rvTrainFrag;
+    private TrainAdapter trainAdapter;
+    private UserRecord  out;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_train, container, false);
+        View view =inflater.inflate(R.layout.fragment_train, container, false);
+
+        out = (UserRecord) getArguments().getSerializable("user");
+        System.out.println("this is it TrainFrag: "+out.getRecord().getEmail());
+        initRecycler(view);
+        return view;
     }
+    private void initRecycler(View view) {
+        rvTrainFrag = view.findViewById(R.id.rvTrainFrag);
+        rvTrainFrag.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        trainAdapter = new TrainAdapter(new TrainAdapter.OnTrainItemClickListener() {
+            @Override
+            public void onItemClick(TrainItem trainItem) {
+                trainCardClicked(trainItem);
+            }
+        });
+
+        rvTrainFrag.setAdapter(trainAdapter);
+        fetchDetails();
+    }
+
+    private void fetchDetails() {
+        RetrofitService retrofitService = new RetrofitService();
+        TrainApi getList = retrofitService.getRetrofit().create(TrainApi.class);
+        Call<TrainRes> call = getList.getAllTrain(out.getToken());
+        System.out.println("Im train Frag "+out.getToken());
+        call.enqueue(new Callback<TrainRes>() {
+            @Override
+            public void onResponse(Call<TrainRes> call, Response<TrainRes> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        TrainRes trainRes = response.body();
+                        List<TrainItem> trainItem = trainRes.getItems();
+                        trainAdapter.setList(trainItem);
+                        Toast.makeText(requireActivity(),trainItem.get(0).getTrainName(),Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(requireActivity(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                    progressLoader.dismissProgressLoader();
+                }
+            }
+            @Override
+            public void onFailure(Call<TrainRes> call, Throwable t) {
+                Toast.makeText(requireActivity(), "Invalid Down", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    private void trainCardClicked(TrainItem trainItem){
+        Toast.makeText(getContext(),trainItem.getTrainType(),Toast.LENGTH_SHORT).show();
+    }
+
 }

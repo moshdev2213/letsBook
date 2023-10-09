@@ -103,6 +103,7 @@ public class SignIn extends AppCompatActivity {
                 public void onResponse(Call<UserRecord> call, Response<UserRecord> response) {
                     if (response.isSuccessful()) {
                         UserRecord user = response.body();
+                        System.out.println("this is it SignIn: "+user);
                         if (user != null) {
                             Intent intent = new Intent(SignIn.this, Home.class);
                             intent.putExtra("user", user); // Assuming "user" is Parcelable or Serializable
