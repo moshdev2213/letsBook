@@ -22,4 +22,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">30dp</item>
     </style>
+    <style name="DialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorAccent">@color/primary</item>
+    </style>
 </resources>

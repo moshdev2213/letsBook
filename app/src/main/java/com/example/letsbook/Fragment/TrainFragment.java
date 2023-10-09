@@ -1,5 +1,6 @@
 package com.example.letsbook.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Toast;
 
+import com.example.letsbook.Activity.TrainDetail;
 import com.example.letsbook.Adapter.TrainAdapter;
 import com.example.letsbook.ApiRoutes.TrainApi;
 import com.example.letsbook.Modal.User;
@@ -82,12 +84,17 @@ public class TrainFragment extends Fragment {
             @Override
             public void onFailure(Call<TrainRes> call, Throwable t) {
                 Toast.makeText(requireActivity(), "Invalid Down", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
     private void trainCardClicked(TrainItem trainItem){
-        Toast.makeText(getContext(),trainItem.getTrainType(),Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("train", trainItem);
+        bundle.putString("token", out.getToken());
+
+        Intent intent = new Intent(requireActivity(), TrainDetail.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

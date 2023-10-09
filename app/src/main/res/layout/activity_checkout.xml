@@ -227,7 +227,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="Customer Information"
+                android:text="Train Information"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView35"
@@ -296,7 +296,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView36"
-                app:layout_constraintTop_toBottomOf="@+id/tvPhoneUser" />
+                app:layout_constraintTop_toBottomOf="@+id/tvSeatBookedDetail" />
 
             <TextView
                 android:id="@+id/textView39"
@@ -321,10 +321,10 @@
                 android:layout_marginTop="16dp"
                 android:alpha="0.6"
                 android:fontFamily="@font/montserrat"
-                android:text="Full Name"
+                android:text="Train Name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvNameUser"
+                app:layout_constraintEnd_toStartOf="@+id/tvNameTrain"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -338,10 +338,10 @@
                 android:layout_marginTop="8dp"
                 android:alpha="0.6"
                 android:fontFamily="@font/montserrat"
-                android:text="Email"
+                android:text="Train Type"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvEmailUser"
+                app:layout_constraintEnd_toStartOf="@+id/tvTypeTrainCheck"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -355,17 +355,17 @@
                 android:layout_marginTop="8dp"
                 android:alpha="0.6"
                 android:fontFamily="@font/montserrat"
-                android:text="Telephone"
+                android:text="Seats Booked"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvPhoneUser"
+                app:layout_constraintEnd_toStartOf="@+id/tvSeatBookedDetail"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
-                android:id="@+id/tvNameUser"
+                android:id="@+id/tvNameTrain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -380,7 +380,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
             <TextView
-                android:id="@+id/tvEmailUser"
+                android:id="@+id/tvTypeTrainCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -392,10 +392,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameUser" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNameTrain" />
 
             <TextView
-                android:id="@+id/tvPhoneUser"
+                android:id="@+id/tvSeatBookedDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -407,7 +407,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView33"
-                app:layout_constraintTop_toBottomOf="@+id/tvEmailUser" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTypeTrainCheck" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvTotalDetails"
