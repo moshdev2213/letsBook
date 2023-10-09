@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Activity.SignIn">
 
+    <TextView
+        android:id="@+id/tvredirectToSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:alpha="0.5"
+        android:fontFamily="@font/montserrat"
+        android:text="New User ? Sign Up Here"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvSignInBtn" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="90dp"
@@ -71,7 +87,7 @@
         android:layout_marginBottom="16dp"
         android:alpha="0.5"
         android:fontFamily="@font/montserrat"
-        android:text="FitMe | All Rights Reserved"
+        android:text="LetsBook | All Rights Reserved"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,6 +118,7 @@
         app:startIconDrawable="@drawable/baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSignInEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -131,12 +148,14 @@
         app:startIconDrawable="@drawable/baseline_key_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSignInPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSignInBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

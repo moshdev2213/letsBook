@@ -48,14 +48,7 @@ public class Home extends AppCompatActivity {
                     replaceFrag(new ReservationFragment());
                     break;
             }
-
-//                if (fragment != null) {
-//                    replaceFrag(fragment, userObj);
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-            return false;
+            return true;
         });
 
     }

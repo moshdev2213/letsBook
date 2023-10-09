@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/et"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SignUp">
@@ -30,9 +31,11 @@
         app:startIconDrawable="@drawable/baseline_credit_card_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNicSignUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLength="12" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,6 +63,7 @@
         app:startIconDrawable="@drawable/baseline_person_pin_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNameSignUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -89,8 +93,11 @@
         app:startIconDrawable="@drawable/baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailSignUp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="text|textEmailAddress"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -149,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvRedirectLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -162,7 +169,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cvSignUpBtn" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutTel"
@@ -190,6 +197,7 @@
         app:startIconDrawable="@drawable/baseline_local_phone_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTelSignUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="phone"
@@ -220,13 +228,14 @@
         app:startIconDrawable="@drawable/baseline_key_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPasswordSignUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+        android:id="@+id/cvSignUpBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
