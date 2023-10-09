@@ -61,6 +61,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <Spinner
+                android:id="@+id/spinnerSheduSelect"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dropdown_background_outline"
+                android:entries="@array/shedu"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerSeatSelect"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/spinnerSeatSelect"
+                app:layout_constraintTop_toTopOf="@+id/spinnerSeatSelect" />
+
+            <Spinner
+                android:id="@+id/spinnerSeatSelect"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/dropdown_background_outline"
+                android:entries="@array/seats"
+                app:layout_constraintEnd_toStartOf="@+id/spinnerSheduSelect"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView12" />
+
             <TextView
                 android:id="@+id/tvMealDescLong"
                 android:layout_width="0dp"
@@ -196,7 +222,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvMealWeight"
+                        android:id="@+id/tvTrainFromDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -250,7 +276,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvMealType"
+                        android:id="@+id/tvTrainToDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -286,7 +312,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/tvPriceMealDetail"
+                        android:id="@+id/tvTrainNameDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -299,7 +325,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/imgBannerMealDetail" />
 
                     <TextView
-                        android:id="@+id/tvMealNameDetail"
+                        android:id="@+id/tvTrainTypeDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -307,9 +333,9 @@
                         android:text="Train Type : 1st  Class"
                         android:textColor="@color/cardBorderText"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvPriceMealDetail"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTrainNameDetail"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvPriceMealDetail" />
+                        app:layout_constraintTop_toTopOf="@+id/tvTrainNameDetail" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/materialCardView13"
@@ -323,7 +349,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/materialCardView12"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/materialCardView11"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPriceMealDetail">
+                        app:layout_constraintTop_toBottomOf="@+id/tvTrainNameDetail">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -412,7 +438,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
-                                android:id="@+id/tvMealCal"
+                                android:id="@+id/tvSeatCal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -428,6 +454,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -3,14 +3,14 @@ package com.example.letsbook.ModalDao;
 import java.io.Serializable;
 import java.util.List;
 
-public class TrainRes implements Serializable {
+public class SheduleRes implements Serializable {
     private int page;
     private int perPage;
     private int totalItems;
     private int totalPages;
-    private List<TrainItem> items;
+    private List<SheduleItem> items;
 
-    public TrainRes(int page, int perPage, int totalItems, int totalPages, List<TrainItem> items) {
+    public SheduleRes(int page, int perPage, int totalItems, int totalPages, List<SheduleItem> items) {
         this.page = page;
         this.perPage = perPage;
         this.totalItems = totalItems;
@@ -50,11 +50,11 @@ public class TrainRes implements Serializable {
         this.totalPages = totalPages;
     }
 
-    public List<TrainItem> getItems() {
+    public List<SheduleItem> getItems() {
         return items;
     }
 
-    public void setItems(List<TrainItem> items) {
+    public void setItems(List<SheduleItem> items) {
         this.items = items;
     }
 }
