@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.letsbook.ApiRoutes.EditUserApi;
+import com.example.letsbook.DialogAlerts.OkNoDialog;
 import com.example.letsbook.DialogAlerts.ProgressLoader;
 import com.example.letsbook.Modal.User;
 import com.example.letsbook.Modal.UserRecord;
@@ -33,7 +34,7 @@ public class EditProfile extends AppCompatActivity {
     private EditText etUserOldPwdEdtPro;
     private EditText etUserTelEdtPro;
     private EditText etUserEmailEdtPro;
-    private ProgressLoader progressLoader;
+    private OkNoDialog okNoDialog;
     private String token;
     private User out;
     @Override
@@ -56,7 +57,7 @@ public class EditProfile extends AppCompatActivity {
 
         if(out!=null){
         etUserEmailEdtPro.setText(out.getItems().get(0).getEmail());
-        etUserTelEdtPro.setText(""+out.getItems().get(0).getPhone());
+//        etUserTelEdtPro.setText(""+out.getItems().get(0).getPhone());
         etUserNameEdtPro.setText(out.getItems().get(0).getName());
 //        Toast.makeText(this,""+out.getItems().get(0).getId(),Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this,""+token,Toast.LENGTH_SHORT).show();
@@ -89,9 +90,6 @@ public class EditProfile extends AppCompatActivity {
     }
     private void editUserProfile(String tokens){
 
-//        progressLoader = new ProgressLoader(getApplicationContext(), "Editing details", "Please Wait");
-//        progressLoader.startProgressLoader();
-
         RetrofitService retrofitService = new RetrofitService();
         EditUserApi authService = retrofitService.getRetrofit().create(EditUserApi.class);
 
@@ -113,14 +111,12 @@ public class EditProfile extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     UpdatedUser user = response.body();
                     if (user != null) {
-//                        progressLoader.dismissProgressLoader();
-//                        finish();
                         Toast.makeText(getApplicationContext(), "Done editing", Toast.LENGTH_SHORT).show();
-
+                        finish();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
-//                    progressLoader.dismissProgressLoader();
+                    finish();
                 }
             }
 
@@ -128,7 +124,7 @@ public class EditProfile extends AppCompatActivity {
             public void onFailure(Call<UpdatedUser> call, Throwable t) {
                 System.out.println("Error: " + t.getMessage()); // Print the error message
                 Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
-//                progressLoader.dismissProgressLoader();
+                finish();
             }
         });
     }

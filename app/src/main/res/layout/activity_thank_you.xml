@@ -39,28 +39,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
     <ImageView
-        android:id="@+id/btnBackReservation3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_arrow_back_24" />
-
-    <ImageView
         android:id="@+id/imageView17"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBackReservation3"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/donepay" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvSignBtn"
+        android:id="@+id/cvGoBackToHomeBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
