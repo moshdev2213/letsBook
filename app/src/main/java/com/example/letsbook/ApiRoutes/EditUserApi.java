@@ -14,7 +14,8 @@ public interface EditUserApi {
     @PATCH("/api/collections/users/records/{id}")
     Call<UpdatedUser> updateUserDetails(
             @Header("Authorization") String authorization,
-            @Path("id") String id
+            @Path("id") String id,
+            @Body UserItem userItem
     );
     @PATCH("/api/collections/users/records/{id}")
     Call<UserItem> deactivateUserAccount(
