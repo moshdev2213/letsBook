@@ -386,7 +386,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="mudiyanseegamage"
+                    android:text="LetsBook User Account"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
