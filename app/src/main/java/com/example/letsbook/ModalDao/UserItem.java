@@ -7,6 +7,33 @@ public class UserItem implements Serializable {
     private String id;
     private String name;
     private long phone;
+    private String nic;
+    private boolean verified;
+
+    public UserItem(String email, String id, String name, long phone, String nic, boolean verified) {
+        this.email = email;
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.nic = nic;
+        this.verified = verified;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 
     public String getId() {
         return id;

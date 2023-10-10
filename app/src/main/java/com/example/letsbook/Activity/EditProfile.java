@@ -14,6 +14,7 @@ import com.example.letsbook.DialogAlerts.ProgressLoader;
 import com.example.letsbook.Modal.User;
 import com.example.letsbook.Modal.UserRecord;
 import com.example.letsbook.ModalDao.UpdatedUser;
+import com.example.letsbook.ModalDao.UserItem;
 import com.example.letsbook.R;
 import com.example.letsbook.RetroftService.RetrofitService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -94,8 +95,18 @@ public class EditProfile extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         EditUserApi authService = retrofitService.getRetrofit().create(EditUserApi.class);
 
-        System.out.println("token CHaeck =" +tokens);
-        Call<UpdatedUser> call = authService.updateUserDetails(tokens,out.getItems().get(0).getId());
+        Call<UpdatedUser> call = authService.updateUserDetails(
+                tokens,
+                out.getItems().get(0).getId(),
+                new UserItem(
+                        out.getItems().get(0).getEmail(),
+                        out.getItems().get(0).getId(),
+                        etUserNameEdtPro.getText().toString(),
+                        Long.parseLong(etUserTelEdtPro.getText().toString()),
+                        out.getItems().get(0).getNic(),
+                        out.getItems().get(0).getVerified()
+                )
+        );
         call.enqueue(new Callback<UpdatedUser>() {
             @Override
             public void onResponse(Call<UpdatedUser> call, Response<UpdatedUser> response) {
@@ -104,11 +115,11 @@ public class EditProfile extends AppCompatActivity {
                     if (user != null) {
 //                        progressLoader.dismissProgressLoader();
 //                        finish();
-//                        Toast.makeText(getApplicationContext(), "Done editing", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Done editing", Toast.LENGTH_SHORT).show();
 
                     }
                 } else {
-//                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
 //                    progressLoader.dismissProgressLoader();
                 }
             }
@@ -116,7 +127,7 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onFailure(Call<UpdatedUser> call, Throwable t) {
                 System.out.println("Error: " + t.getMessage()); // Print the error message
-//                Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
 //                progressLoader.dismissProgressLoader();
             }
         });

@@ -78,14 +78,14 @@ public class Checkout extends AppCompatActivity {
     private void reserveTrain(){
         RetrofitService retrofitService = new RetrofitService();
         ReservationApi makeReservation = retrofitService.getRetrofit().create(ReservationApi.class);
-        Call<ReservationReq> call = makeReservation.createReservation(token, new ReservationReq(trainItem.getId(),checkRes.getSheduleId(),"moshdev2213@gmail.com",checkRes.getSelectedDate(),Integer.parseInt(checkRes.getSelectedSeat())));
+        Call<ReservationReq> call = makeReservation.createReservation(token, new ReservationReq(trainItem.getId(),checkRes.getSheduleId(),"moshdev2213@gmail.com",checkRes.getSelectedDate(),Integer.parseInt(checkRes.getSelectedSeat()),0));
 
-        System.out.println(token+" "+trainItem.getId()+" "+checkRes.getSelectedDate()+" "+checkRes.getSheduleId()+" "+Integer.parseInt(checkRes.getSelectedSeat()));
+        System.out.println(call.request()+ " "+ token+" "+trainItem.getId()+" "+checkRes.getSelectedDate()+" "+checkRes.getSheduleId()+" "+Integer.parseInt(checkRes.getSelectedSeat()));
 
         call.enqueue(new Callback<ReservationReq>() {
             @Override
             public void onResponse(Call<ReservationReq> call, Response<ReservationReq> response) {
-                System.out.println(response.code());
+                System.out.println(response.body());
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         ReservationReq reservationReq = response.body();
