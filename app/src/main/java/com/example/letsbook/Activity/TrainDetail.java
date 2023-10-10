@@ -152,7 +152,7 @@ public class TrainDetail extends AppCompatActivity {
                                 }else{
                                     // The selected date is not within the allowed range
                                     // Show an error message or perform appropriate actions
-                                    Toast.makeText(TrainDetail.this, "Invalid date selection. Please select a date within the allowed range.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TrainDetail.this, "Invalid selection. Allowed Only For A Month", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, year, month, day);

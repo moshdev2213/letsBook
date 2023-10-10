@@ -13,6 +13,16 @@ public class ReservationItem implements Serializable {
     private String reserved;
     private int seats;
     private String email;
+    private int canceled;
+
+
+    public int getCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(int canceled) {
+        this.canceled = canceled;
+    }
 
     public String getId() {
         return id;
@@ -94,7 +104,7 @@ public class ReservationItem implements Serializable {
         this.email = email;
     }
 
-    public ReservationItem(String id, String collectionId, String collectionName, String created, String updated, String trainId, String sheduleId, String reserved, int seats, String email) {
+    public ReservationItem(String id, String collectionId, String collectionName, String created, String updated, String trainId, String sheduleId, String reserved, int seats, String email,int canceled) {
         this.id = id;
         this.collectionId = collectionId;
         this.collectionName = collectionName;
@@ -105,5 +115,6 @@ public class ReservationItem implements Serializable {
         this.reserved = reserved;
         this.seats = seats;
         this.email = email;
+        this.canceled = canceled;
     }
 }
