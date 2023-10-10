@@ -74,7 +74,6 @@ public class TrainFragment extends Fragment {
                         TrainRes trainRes = response.body();
                         List<TrainItem> trainItem = trainRes.getItems();
                         trainAdapter.setList(trainItem);
-                        Toast.makeText(requireActivity(),trainItem.get(0).getTrainName(),Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(requireActivity(), "Invalid Credentials", Toast.LENGTH_SHORT).show();

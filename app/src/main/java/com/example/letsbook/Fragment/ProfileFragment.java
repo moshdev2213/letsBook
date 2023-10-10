@@ -83,8 +83,9 @@ public class ProfileFragment extends Fragment {
         cvLogoutUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(requireActivity(), SignIn.class));
-                requireActivity().finish();
+                Intent intent = new Intent(requireActivity(), SignIn.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         fabEditMe.setOnClickListener(new View.OnClickListener() {

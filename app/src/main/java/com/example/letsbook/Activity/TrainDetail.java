@@ -191,15 +191,17 @@ public class TrainDetail extends AppCompatActivity {
                         SheduleRes sheduleRes = response.body();
                         SheduleItem sheduleItem = sheduleRes.getItems().get(0);
                         sheduleCallback.onLoadGetSheduleData(sheduleItem);
+                        cvBuyBtn.setClickable(true);
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
-//                    progressLoader.dismissProgressLoader();
+                    cvBuyBtn.setClickable(false);
                 }
             }
             @Override
             public void onFailure(Call<SheduleRes> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Invalid Down", Toast.LENGTH_SHORT).show();
+                cvBuyBtn.setClickable(false);
             }
         });
     }
