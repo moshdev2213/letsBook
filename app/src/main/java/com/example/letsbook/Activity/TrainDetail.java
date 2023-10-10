@@ -115,24 +115,45 @@ public class TrainDetail extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Calculate the maximum date (30 days from the current date)
+                calendar.add(Calendar.DAY_OF_MONTH, 30);
+                int maxYear = calendar.get(Calendar.YEAR);
+                int maxMonth = calendar.get(Calendar.MONTH);
+                int maxDay = calendar.get(Calendar.DAY_OF_MONTH);
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         TrainDetail.this, R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
                                 // Handle the selected date
-                                String selectedDate = selectedYear + "." + (selectedMonth + 1) + "." + selectedDay;
+                                Calendar selectedDateCalendar = Calendar.getInstance();
+                                selectedDateCalendar.set(selectedYear, selectedMonth, selectedDay);
 
-                                CheckRes checkRes = new CheckRes(selectedDate,selectedSeat,selectedSchedule,sheduleId);
+                                // Check if the selected date is within the allowed range
+                                Calendar minDateCalendar = Calendar.getInstance();
+                                Calendar maxDateCalendar = Calendar.getInstance();
+                                maxDateCalendar.add(Calendar.DAY_OF_MONTH, 30); // 30 days from the current date
 
-                                Intent intent = new Intent(TrainDetail.this, Checkout.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("trainItem", trainItem);
-                                bundle.putSerializable("token", token);
-                                bundle.putSerializable("checkRes", checkRes);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                finish();
+                                if (selectedDateCalendar.after(minDateCalendar) && selectedDateCalendar.before(maxDateCalendar)) {
+                                    // Handle the selected date
+                                    String selectedDate = selectedYear + "." + (selectedMonth + 1) + "." + selectedDay;
+                                    CheckRes checkRes = new CheckRes(selectedDate,selectedSeat,selectedSchedule,sheduleId);
+
+                                    Intent intent = new Intent(TrainDetail.this, Checkout.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("trainItem", trainItem);
+                                    bundle.putSerializable("token", token);
+                                    bundle.putSerializable("checkRes", checkRes);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    // The selected date is not within the allowed range
+                                    // Show an error message or perform appropriate actions
+                                    Toast.makeText(TrainDetail.this, "Invalid date selection. Please select a date within the allowed range.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }, year, month, day);
 
