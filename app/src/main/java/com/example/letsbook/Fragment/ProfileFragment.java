@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         out = (UserRecord) getArguments().getSerializable("user");
-        System.out.println("this is it ProFrag: "+out.getRecord().getEmail());
+//        System.out.println("this is it ProFrag: "+out.getRecord().getEmail());
 
         fragmentProfileClayout = view.findViewById(R.id.fragmentProfileClayout);
         fragmentProfileClayout.setVisibility(View.GONE);
@@ -95,7 +95,7 @@ public class ProfileFragment extends Fragment {
 
                     Intent intent = new Intent(requireActivity(), EditProfile.class);
                     intent.putExtra("user", user);
-                    intent.putExtra("token", out.getToken()); // Add the String data// Assuming "user" is Parcelable or Serializable
+                    intent.putExtra("token", out.getData()); // Add the String data// Assuming "user" is Parcelable or Serializable
                     startActivity(intent);
                 });
             }
@@ -116,7 +116,7 @@ public class ProfileFragment extends Fragment {
                         EditUserApi getList = retrofitService.getRetrofit().create(EditUserApi.class);
                         Call<UserItem> call = getList
                                 .deactivateUserAccount(
-                                        out.getToken(),
+                                        out.getData(),
                                         dupUser.getItems().get(0).getId(),
                                         new UserItem(
                                                 dupUser.getItems().get(0).getEmail(),
@@ -180,9 +180,9 @@ public class ProfileFragment extends Fragment {
             RetrofitService retrofitService = new RetrofitService();
             AuthApi authService = retrofitService.getRetrofit().create(AuthApi.class);
 
-            String emailToFilter = out.getRecord().getEmail();
+            String emailToFilter = out.getData();
             String filterValue = "email=\"" + emailToFilter + "\"";
-            Call<User> call = authService.getUserDetail(filterValue, out.getToken());
+            Call<User> call = authService.getUserDetail(filterValue, out.getData());
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {

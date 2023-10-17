@@ -119,6 +119,8 @@ public class SignIn extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<UserRecord> call, Throwable t) {
+                    System.out.println(t.getCause());
+                    System.out.println("Error: " + t.getMessage()); // Print the error message
                     Toast.makeText(SignIn.this, "Server Error", Toast.LENGTH_SHORT).show();
                     progressLoader.dismissProgressLoader();
                 }

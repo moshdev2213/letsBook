@@ -42,7 +42,7 @@ public class TrainFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_train, container, false);
 
         out = (UserRecord) getArguments().getSerializable("user");
-        System.out.println("this is it TrainFrag: "+out.getRecord().getEmail());
+        System.out.println("this is it TrainFrag: "+out.getData());
         initRecycler(view);
         return view;
     }
@@ -64,8 +64,8 @@ public class TrainFragment extends Fragment {
     private void fetchDetails() {
         RetrofitService retrofitService = new RetrofitService();
         TrainApi getList = retrofitService.getRetrofit().create(TrainApi.class);
-        Call<TrainRes> call = getList.getAllTrain(out.getToken());
-        System.out.println("Im train Frag "+out.getToken());
+        Call<TrainRes> call = getList.getAllTrain(out.getData());
+        System.out.println("Im train Frag "+out.getData());
         call.enqueue(new Callback<TrainRes>() {
             @Override
             public void onResponse(Call<TrainRes> call, Response<TrainRes> response) {
@@ -89,7 +89,7 @@ public class TrainFragment extends Fragment {
     private void trainCardClicked(TrainItem trainItem){
         Bundle bundle = new Bundle();
         bundle.putSerializable("train", trainItem);
-        bundle.putString("token", out.getToken());
+        bundle.putString("token", out.getData());
 
         Intent intent = new Intent(requireActivity(), TrainDetail.class);
         intent.putExtras(bundle);

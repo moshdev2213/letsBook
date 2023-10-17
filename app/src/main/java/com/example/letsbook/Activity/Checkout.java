@@ -89,7 +89,7 @@ public class Checkout extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         ReservationReq reservationReq = response.body();
-                        UserRecord userRecord = new UserRecord(token,new Record(reservationReq.getEmail()));
+                        UserRecord userRecord = new UserRecord(token,true,"");
 
                         Intent intent = new Intent(Checkout.this, ThankYou.class);
                         intent.putExtra("user", userRecord); // Assuming "user" is Parcelable or Serializable

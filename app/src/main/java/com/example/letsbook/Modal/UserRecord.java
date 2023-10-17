@@ -5,19 +5,38 @@ import com.example.letsbook.ModalDao.Record;
 import java.io.Serializable;
 
 public class UserRecord implements Serializable {
-    private String token;
-    private Record record;
 
-    public UserRecord(String token, Record record) {
-        this.token = token;
-        this.record = record;
+    private String data;
+    private boolean success;
+    private String message;
+
+    public UserRecord(String data, boolean success, String message) {
+        this.data = data;
+        this.success = success;
+        this.message = message;
     }
 
-    public String getToken() {
-        return token;
+    public String getData() {
+        return data;
     }
 
-    public Record getRecord() {
-        return record;
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -33,7 +33,7 @@ public class Home extends AppCompatActivity {
         UserRecord receivedUser = (UserRecord) getIntent().getSerializableExtra("user");
 
         replaceFrag(new IndexFragment(),receivedUser);
-        System.out.println("this is it Home: "+receivedUser.getRecord().getEmail());
+//        System.out.println("this is it Home: "+receivedUser.getRecord().getEmail());
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {

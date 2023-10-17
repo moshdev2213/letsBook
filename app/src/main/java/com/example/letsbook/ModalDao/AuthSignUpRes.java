@@ -1,58 +1,38 @@
 package com.example.letsbook.ModalDao;
 
 public class AuthSignUpRes {
-    private String id;
-    private String email;
-    private String name;
-    private String nic;
-    private int phone;
 
+    private String data;
+    private boolean success;
+    private String message;
 
-    public AuthSignUpRes(String id, String email, String name, String nic, int phone) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.nic = nic;
-        this.phone = phone;
+    public AuthSignUpRes(String data, boolean success, String message) {
+        this.data = data;
+        this.success = success;
+        this.message = message;
     }
 
-    public String getId() {
-        return id;
+    public String getData() {
+        return data;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean getSuccess() {
+        return success;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public String getName() {
-        return name;
+    public String getMessage() {
+        return message;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNic() {
-        return nic;
-    }
-
-    public void setNic(String nic) {
-        this.nic = nic;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

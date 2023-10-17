@@ -25,13 +25,14 @@ public class SignInForm {
     }
     public ValidationResult validatePassword(String password) {
         // The regex pattern
-        String passwordPattern = "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+//        String passwordPattern = "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 
         if (password.isEmpty()) {
             return new ValidationResult.Empty("Enter Password");
-        } else if (!password.matches(passwordPattern)) {
-            return new ValidationResult.Invalid("Invalid ex: Aa@asda22");
-        } else {
+//        } else if (!password.matches(passwordPattern)) {
+//            return new ValidationResult.Invalid("Invalid ex: Aa@asda22");
+        }
+        else {
             return ValidationResult.Valid.getInstance();
         }
     }

@@ -132,7 +132,7 @@ public class SignUp extends AppCompatActivity {
                     System.out.println(response.body());
                     if (response.isSuccessful()) {
                         AuthSignUpRes user = response.body();
-                        if (user != null) {
+                        if (user.getSuccess()==true) {
                             Intent intent = new Intent(SignUp.this, SignIn.class);
                             startActivity(intent);
                             progressLoader.dismissProgressLoader();

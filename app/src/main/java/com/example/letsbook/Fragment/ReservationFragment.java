@@ -51,7 +51,7 @@ public class ReservationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reservation, container, false);
 
         out = (UserRecord) getArguments().getSerializable("user");
-        System.out.println("this is it ReserveFrag: "+out.getRecord().getEmail());
+//        System.out.println("this is it ReserveFrag: "+out.getRecord().getEmail());
         initRecycler(view);
         return view;
     }
@@ -119,7 +119,7 @@ public class ReservationFragment extends Fragment {
                         ReservationApi getList = retrofitService.getRetrofit().create(ReservationApi.class);
                         Call<ReservationItem> call = getList
                                 .editReservation(
-                                        out.getToken(),
+                                        out.getData(),
                                         reservationItem.getId(),
                                         new ReservationReq(
                                                 reservationItem.getTrainId(),
@@ -195,7 +195,7 @@ public class ReservationFragment extends Fragment {
                 ReservationApi getList = retrofitService.getRetrofit().create(ReservationApi.class);
                 Call<ReservationItem> call = getList
                         .cancelReservation(
-                                out.getToken(),
+                                out.getData(),
                                 reservationItem.getId(),
                                 new ReservationReq(
                                         reservationItem.getTrainId(),
@@ -250,8 +250,8 @@ public class ReservationFragment extends Fragment {
     private void fetchDetails() {
         RetrofitService retrofitService = new RetrofitService();
         ReservationApi getList = retrofitService.getRetrofit().create(ReservationApi.class);
-        Call<ReservationRes> call = getList.getAllReservations(out.getToken());
-        System.out.println("Im train Frag "+out.getToken());
+        Call<ReservationRes> call = getList.getAllReservations(out.getData());
+        System.out.println("Im train Frag "+out.getData());
         call.enqueue(new Callback<ReservationRes>() {
             @Override
             public void onResponse(Call<ReservationRes> call, Response<ReservationRes> response) {

@@ -24,7 +24,7 @@ public class RetrofitService {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl("https://lets-book.pockethost.io")
+                .baseUrl("http://192.168.8.150:5083")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(okHttpClient)
                 .build();

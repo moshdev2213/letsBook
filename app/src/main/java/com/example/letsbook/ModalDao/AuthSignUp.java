@@ -3,7 +3,7 @@ package com.example.letsbook.ModalDao;
 import java.io.Serializable;
 
 public class AuthSignUp implements Serializable {
-    private String phone;
+    private String contactNo;
     private String email;
     private String name;
     private String nic;
@@ -11,7 +11,7 @@ public class AuthSignUp implements Serializable {
     private String passwordConfirm;
 
     public AuthSignUp(String phone, String email, String name, String nic, String password, String passwordConfirm) {
-        this.phone = phone;
+        this.contactNo = phone;
         this.email = email;
         this.name = name;
         this.nic = nic;
@@ -20,11 +20,11 @@ public class AuthSignUp implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        return contactNo;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.contactNo = phone;
     }
 
     public String getEmail() {
