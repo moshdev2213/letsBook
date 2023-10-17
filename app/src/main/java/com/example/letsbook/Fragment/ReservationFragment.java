@@ -250,11 +250,18 @@ public class ReservationFragment extends Fragment {
     private void fetchDetails() {
         RetrofitService retrofitService = new RetrofitService();
         ReservationApi getList = retrofitService.getRetrofit().create(ReservationApi.class);
-        Call<ReservationRes> call = getList.getAllReservations(out.getToken());
+
+        String emailToFilter = out.getRecord().getEmail();
+        String filterValue = "(email=\"" + emailToFilter + "\")";
+
+        System.out.println("Pkoooooooooo : "+filterValue);
+
+        Call<ReservationRes> call = getList.getAllReservations(filterValue,out.getToken());
         System.out.println("Im train Frag "+out.getToken());
         call.enqueue(new Callback<ReservationRes>() {
             @Override
             public void onResponse(Call<ReservationRes> call, Response<ReservationRes> response) {
+                System.out.println(response.body());
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         ReservationRes reserveRes = response.body();
@@ -262,7 +269,7 @@ public class ReservationFragment extends Fragment {
                         reservationAdapter.setList(trainItem);
                     }
                 } else {
-                    Toast.makeText(requireActivity(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "No Bookings", Toast.LENGTH_SHORT).show();
 //                    progressLoader.dismissProgressLoader();
                 }
             }

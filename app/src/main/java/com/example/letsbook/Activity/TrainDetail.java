@@ -38,6 +38,7 @@ import retrofit2.Response;
 public class TrainDetail extends AppCompatActivity {
     private TrainItem trainItem;
     private String token;
+    private String emailUser;
     private TextView tvTrainTypeDetail;
     private TextView tvTrainNameDetail;
     private TextView tvTrainFromDetail;
@@ -60,6 +61,7 @@ public class TrainDetail extends AppCompatActivity {
         if (bundle != null) {
             trainItem = (TrainItem) bundle.getSerializable("train");
             token =  bundle.getString("token");
+            emailUser =  bundle.getString("emailUser");
         }
 
         cvBackBtn = findViewById(R.id.cvBackBtn);
@@ -145,6 +147,7 @@ public class TrainDetail extends AppCompatActivity {
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable("trainItem", trainItem);
                                     bundle.putSerializable("token", token);
+                                    bundle.putSerializable("emailUser", emailUser);
                                     bundle.putSerializable("checkRes", checkRes);
                                     intent.putExtras(bundle);
                                     startActivity(intent);

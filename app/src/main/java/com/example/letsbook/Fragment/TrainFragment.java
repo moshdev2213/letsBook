@@ -90,6 +90,7 @@ public class TrainFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putSerializable("train", trainItem);
         bundle.putString("token", out.getToken());
+        bundle.putString("emailUser", out.getRecord().getEmail());
 
         Intent intent = new Intent(requireActivity(), TrainDetail.class);
         intent.putExtras(bundle);

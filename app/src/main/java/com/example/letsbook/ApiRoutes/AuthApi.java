@@ -23,7 +23,7 @@ public interface AuthApi {
 
     @GET("/api/collections/users/records")
     Call<User> getUserDetail(
-            @Query("filter") String email,
+            @Query("filter") String filter,
             @Header("Authorization") String authorization
             );
 

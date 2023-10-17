@@ -36,6 +36,7 @@ import com.example.letsbook.R;
 import com.example.letsbook.RetroftService.RetrofitService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -181,7 +182,7 @@ public class ProfileFragment extends Fragment {
             AuthApi authService = retrofitService.getRetrofit().create(AuthApi.class);
 
             String emailToFilter = out.getRecord().getEmail();
-            String filterValue = "email=\"" + emailToFilter + "\"";
+            String filterValue = "(email=\"" + emailToFilter + "\")";
             Call<User> call = authService.getUserDetail(filterValue, out.getToken());
             call.enqueue(new Callback<User>() {
                 @Override
@@ -190,12 +191,16 @@ public class ProfileFragment extends Fragment {
                     if (response.isSuccessful()) {
                         User user = response.body();
                         if (user != null) {
-                            userCallback.onLoadGetUserData(user);
-                            UserItem firstUserItem = user.getItems().get(0);
-                            progressLoader.dismissProgressLoader();
-                            tvUserEmail.setText(firstUserItem.getEmail());
-                            tvUserTel.setText(" Tel : "+firstUserItem.getPhone());
-                            fragmentProfileClayout.setVisibility(View.VISIBLE);
+                            List<UserItem> userItems = user.getItems();
+                            if (!userItems.isEmpty()) {
+                                UserItem firstUserItem = userItems.get(0);
+                                progressLoader.dismissProgressLoader();
+                                tvUserEmail.setText(firstUserItem.getEmail());
+                                tvUserTel.setText(" Tel : " + firstUserItem.getPhone());
+                                fragmentProfileClayout.setVisibility(View.VISIBLE);
+                            } else {
+                                // Handle the case when the list is empty
+                            }
                         }
                     } else {
                         Toast.makeText(requireActivity(), "Invalid Credentials", Toast.LENGTH_SHORT).show();

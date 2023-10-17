@@ -11,6 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ReservationApi {
     @POST("/api/collections/reservation/records")
@@ -20,6 +21,7 @@ public interface ReservationApi {
     );
     @GET("/api/collections/reservation/records")
     Call<ReservationRes> getAllReservations(
+            @Query("filter") String filter,
             @Header("Authorization") String authorization
     );
     @PATCH("/api/collections/reservation/records/{id}")

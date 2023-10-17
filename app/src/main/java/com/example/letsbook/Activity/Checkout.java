@@ -39,6 +39,7 @@ public class Checkout extends AppCompatActivity {
     private TrainItem trainItem;
     private CheckRes checkRes;
     private String  token;
+    private String  emailUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class Checkout extends AppCompatActivity {
         if (bundle != null) {
              trainItem = (TrainItem) bundle.getSerializable("trainItem");
             token = bundle.getString("token");
+            emailUser = bundle.getString("emailUser");
              checkRes = (CheckRes) bundle.getSerializable("checkRes");
 
             tvNameTrain.setText(trainItem.getTrainName());
@@ -78,7 +80,7 @@ public class Checkout extends AppCompatActivity {
     private void reserveTrain(){
         RetrofitService retrofitService = new RetrofitService();
         ReservationApi makeReservation = retrofitService.getRetrofit().create(ReservationApi.class);
-        Call<ReservationReq> call = makeReservation.createReservation(token, new ReservationReq(trainItem.getId(),checkRes.getSheduleId(),"moshdev2213@gmail.com",checkRes.getSelectedDate(),Integer.parseInt(checkRes.getSelectedSeat()),0));
+        Call<ReservationReq> call = makeReservation.createReservation(token, new ReservationReq(trainItem.getId(),checkRes.getSheduleId(),emailUser,checkRes.getSelectedDate(),Integer.parseInt(checkRes.getSelectedSeat()),0));
 
         System.out.println(call.request()+ " "+ token+" "+trainItem.getId()+" "+checkRes.getSelectedDate()+" "+checkRes.getSheduleId()+" "+Integer.parseInt(checkRes.getSelectedSeat()));
 
